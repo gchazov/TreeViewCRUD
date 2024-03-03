@@ -59,6 +59,7 @@
             // 
             // treeView
             // 
+            this.treeView.AllowDrop = true;
             this.treeView.Enabled = false;
             this.treeView.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.treeView.Location = new System.Drawing.Point(80, 53);
@@ -182,7 +183,7 @@
             this.удалитьToolStripMenuItem1,
             this.удалитьСотрудникаToolStripMenuItem});
             this.employeeMenu.Name = "employeeMenu";
-            this.employeeMenu.Size = new System.Drawing.Size(258, 76);
+            this.employeeMenu.Size = new System.Drawing.Size(258, 54);
             // 
             // изменитьДанныеОСотрудникеToolStripMenuItem
             // 

@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Asn1.X509;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using TreeView = System.Windows.Forms.TreeView;
 
 namespace CRUDTreeview
 {
@@ -19,9 +21,74 @@ namespace CRUDTreeview
             InitializeComponent();
             treeView.ContextMenuStrip = commonMenu;
             text.Text = "\tЗдесь появятся данные\rпосле нажатия кнопки загрузки";
+            // Включаем возможность перетаскивания элементов в TreeView
+            treeView.AllowDrop = true;
+            treeView.ItemDrag += TreeView_ItemDrag;
+            treeView.DragEnter += TreeView_DragEnter;
+            treeView.DragDrop += TreeView_DragDrop;
         }
 
-        public TreeView getTree
+        private void TreeView_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            // Проверяем, что перетаскиваемый элемент - это наш кастомный тип узла
+            if (e.Item is TreeNodeWithID)
+            {
+                DoDragDrop(e.Item, DragDropEffects.Move);
+            }
+        }
+
+        private void TreeView_DragEnter(object sender, DragEventArgs e)
+        {
+            // Проверяем, что данные, которые мы перетаскиваем, соответствуют нашему кастомному типу узла
+            if (e.Data.GetDataPresent(typeof(TreeNodeWithID)))
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void TreeView_DragDrop(object sender, DragEventArgs e)
+        {
+            // Получаем перетаскиваемый узел из данных
+            TreeNodeWithID draggedNode = (TreeNodeWithID)e.Data.GetData(typeof(TreeNodeWithID));
+
+            // Получаем точку, в которую был брошен узел
+            Point targetPoint = treeView.PointToClient(new Point(e.X, e.Y));
+
+            // Получаем узел, над которым был брошен перетаскиваемый узел
+            TreeNode targetNode = treeView.GetNodeAt(targetPoint);
+
+            // Проверяем, не пытаемся ли перетащить узел на самого себя или на его потомка
+            if (!draggedNode.Equals(targetNode) && !ContainsNode(draggedNode, targetNode))
+            {
+                // Удаляем узел из его текущего местоположения
+                draggedNode.Remove();
+
+                // Если целевой узел равен null, значит, узел был брошен вне TreeView
+                if (targetNode == null)
+                    treeView.Nodes.Add(draggedNode);
+                else
+                    targetNode.Nodes.Add(draggedNode);
+
+                // Раскрываем родительский узел целевого узла, чтобы показать добавленный узел
+                targetNode.Expand();
+            }
+        }
+
+        private bool ContainsNode(TreeNode node1, TreeNode node2)
+        {
+            // Проверяем, является ли node2 потомком node1
+            if (node2 == null || node2.Parent == null)
+                return false;
+            if (node2.Parent.Equals(node1))
+                return true;
+            return ContainsNode(node1, node2.Parent);
+        }
+
+        public System.Windows.Forms.TreeView getTree
         {
             get { return treeView; }
             set { treeView = value; }
@@ -234,5 +301,6 @@ namespace CRUDTreeview
                 MessageBox.Show("Произошла ошибка при удалении! Возможно, не был выбран элемент", "Ошибка");
             }
         }
+
     }
 }
