@@ -28,24 +28,51 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.treeView = new System.Windows.Forms.TreeView();
             this.load_btn = new System.Windows.Forms.Button();
             this.dropDown = new System.Windows.Forms.Button();
             this.rollUp = new System.Windows.Forms.Button();
+            this.officeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.добавитьОфисToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeCity = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.удалитьОфисToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.teamMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.добавитьКомандуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.удалитьКомандуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.employeeMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.изменитьДанныеОСотрудникеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.удалитьToolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.удалитьСотрудникаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.изменитьНазваниеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.commonMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addOfficeMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.text = new System.Windows.Forms.Label();
+            this.officeMenu.SuspendLayout();
+            this.teamMenu.SuspendLayout();
+            this.employeeMenu.SuspendLayout();
+            this.commonMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeView
             // 
-            this.treeView.Location = new System.Drawing.Point(60, 43);
+            this.treeView.Enabled = false;
+            this.treeView.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.treeView.Location = new System.Drawing.Point(80, 53);
+            this.treeView.Margin = new System.Windows.Forms.Padding(4);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(306, 271);
+            this.treeView.Size = new System.Drawing.Size(431, 333);
             this.treeView.TabIndex = 0;
             // 
             // load_btn
             // 
-            this.load_btn.Location = new System.Drawing.Point(153, 336);
+            this.load_btn.Location = new System.Drawing.Point(217, 406);
+            this.load_btn.Margin = new System.Windows.Forms.Padding(4);
             this.load_btn.Name = "load_btn";
-            this.load_btn.Size = new System.Drawing.Size(122, 23);
+            this.load_btn.Size = new System.Drawing.Size(163, 28);
             this.load_btn.TabIndex = 1;
             this.load_btn.Text = "LOAD DATA";
             this.load_btn.UseVisualStyleBackColor = true;
@@ -53,9 +80,10 @@
             // 
             // dropDown
             // 
-            this.dropDown.Location = new System.Drawing.Point(416, 84);
+            this.dropDown.Location = new System.Drawing.Point(555, 103);
+            this.dropDown.Margin = new System.Windows.Forms.Padding(4);
             this.dropDown.Name = "dropDown";
-            this.dropDown.Size = new System.Drawing.Size(137, 23);
+            this.dropDown.Size = new System.Drawing.Size(183, 28);
             this.dropDown.TabIndex = 2;
             this.dropDown.Text = "DROP DOWN ALL";
             this.dropDown.UseVisualStyleBackColor = true;
@@ -63,26 +91,169 @@
             // 
             // rollUp
             // 
-            this.rollUp.Location = new System.Drawing.Point(416, 144);
+            this.rollUp.Location = new System.Drawing.Point(555, 177);
+            this.rollUp.Margin = new System.Windows.Forms.Padding(4);
             this.rollUp.Name = "rollUp";
-            this.rollUp.Size = new System.Drawing.Size(137, 23);
+            this.rollUp.Size = new System.Drawing.Size(183, 28);
             this.rollUp.TabIndex = 3;
             this.rollUp.Text = "ROLL UP ALL";
             this.rollUp.UseVisualStyleBackColor = true;
             this.rollUp.Click += new System.EventHandler(this.rollUp_Click);
             // 
+            // officeMenu
+            // 
+            this.officeMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.officeMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.добавитьОфисToolStripMenuItem,
+            this.changeCity,
+            this.toolStripMenuItem1,
+            this.удалитьОфисToolStripMenuItem1});
+            this.officeMenu.Name = "officeMenu";
+            this.officeMenu.Size = new System.Drawing.Size(227, 76);
+            // 
+            // добавитьОфисToolStripMenuItem
+            // 
+            this.добавитьОфисToolStripMenuItem.Name = "добавитьОфисToolStripMenuItem";
+            this.добавитьОфисToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.добавитьОфисToolStripMenuItem.Text = "Добавить команду в офис...";
+            this.добавитьОфисToolStripMenuItem.Click += new System.EventHandler(this.addTeam);
+            // 
+            // changeCity
+            // 
+            this.changeCity.Name = "changeCity";
+            this.changeCity.Size = new System.Drawing.Size(226, 22);
+            this.changeCity.Text = "Изменить город...";
+            this.changeCity.Click += new System.EventHandler(this.editoffice);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(223, 6);
+            // 
+            // удалитьОфисToolStripMenuItem1
+            // 
+            this.удалитьОфисToolStripMenuItem1.Name = "удалитьОфисToolStripMenuItem1";
+            this.удалитьОфисToolStripMenuItem1.Size = new System.Drawing.Size(226, 22);
+            this.удалитьОфисToolStripMenuItem1.Text = "Удалить офис";
+            this.удалитьОфисToolStripMenuItem1.Click += new System.EventHandler(this.deleteOffice);
+            // 
+            // teamMenu
+            // 
+            this.teamMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.teamMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.добавитьКомандуToolStripMenuItem,
+            this.удалитьToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.удалитьКомандуToolStripMenuItem});
+            this.teamMenu.Name = "teamMenu";
+            this.teamMenu.Size = new System.Drawing.Size(256, 76);
+            // 
+            // добавитьКомандуToolStripMenuItem
+            // 
+            this.добавитьКомандуToolStripMenuItem.Name = "добавитьКомандуToolStripMenuItem";
+            this.добавитьКомандуToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.добавитьКомандуToolStripMenuItem.Text = "Добавить работника в команду...";
+            this.добавитьКомандуToolStripMenuItem.Click += new System.EventHandler(this.addEmployee);
+            // 
+            // удалитьToolStripMenuItem
+            // 
+            this.удалитьToolStripMenuItem.Name = "удалитьToolStripMenuItem";
+            this.удалитьToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.удалитьToolStripMenuItem.Text = "Изменить название...";
+            this.удалитьToolStripMenuItem.Click += new System.EventHandler(this.editTeam);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(252, 6);
+            // 
+            // удалитьКомандуToolStripMenuItem
+            // 
+            this.удалитьКомандуToolStripMenuItem.Name = "удалитьКомандуToolStripMenuItem";
+            this.удалитьКомандуToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.удалитьКомандуToolStripMenuItem.Text = "Удалить команду";
+            this.удалитьКомандуToolStripMenuItem.Click += new System.EventHandler(this.deleteTeam);
+            // 
+            // employeeMenu
+            // 
+            this.employeeMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.employeeMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.изменитьДанныеОСотрудникеToolStripMenuItem,
+            this.удалитьToolStripMenuItem1,
+            this.удалитьСотрудникаToolStripMenuItem});
+            this.employeeMenu.Name = "employeeMenu";
+            this.employeeMenu.Size = new System.Drawing.Size(258, 76);
+            // 
+            // изменитьДанныеОСотрудникеToolStripMenuItem
+            // 
+            this.изменитьДанныеОСотрудникеToolStripMenuItem.Name = "изменитьДанныеОСотрудникеToolStripMenuItem";
+            this.изменитьДанныеОСотрудникеToolStripMenuItem.Size = new System.Drawing.Size(257, 22);
+            this.изменитьДанныеОСотрудникеToolStripMenuItem.Text = "Изменить данные о сотруднике...";
+            this.изменитьДанныеОСотрудникеToolStripMenuItem.Click += new System.EventHandler(this.editEmployee);
+            // 
+            // удалитьToolStripMenuItem1
+            // 
+            this.удалитьToolStripMenuItem1.Name = "удалитьToolStripMenuItem1";
+            this.удалитьToolStripMenuItem1.Size = new System.Drawing.Size(254, 6);
+            // 
+            // удалитьСотрудникаToolStripMenuItem
+            // 
+            this.удалитьСотрудникаToolStripMenuItem.Name = "удалитьСотрудникаToolStripMenuItem";
+            this.удалитьСотрудникаToolStripMenuItem.Size = new System.Drawing.Size(257, 22);
+            this.удалитьСотрудникаToolStripMenuItem.Text = "Удалить сотрудника";
+            this.удалитьСотрудникаToolStripMenuItem.Click += new System.EventHandler(this.deleteEmployee);
+            // 
+            // изменитьНазваниеToolStripMenuItem
+            // 
+            this.изменитьНазваниеToolStripMenuItem.Name = "изменитьНазваниеToolStripMenuItem";
+            this.изменитьНазваниеToolStripMenuItem.Size = new System.Drawing.Size(226, 24);
+            this.изменитьНазваниеToolStripMenuItem.Text = "Изменить название...";
+            // 
+            // commonMenu
+            // 
+            this.commonMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addOfficeMenu});
+            this.commonMenu.Name = "commonMenu";
+            this.commonMenu.Size = new System.Drawing.Size(207, 26);
+            // 
+            // addOfficeMenu
+            // 
+            this.addOfficeMenu.Name = "addOfficeMenu";
+            this.addOfficeMenu.Size = new System.Drawing.Size(206, 22);
+            this.addOfficeMenu.Text = "Добавить новый офис...";
+            this.addOfficeMenu.Click += new System.EventHandler(this.addOffice);
+            // 
+            // text
+            // 
+            this.text.AutoSize = true;
+            this.text.BackColor = System.Drawing.Color.Transparent;
+            this.text.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.text.Location = new System.Drawing.Point(94, 212);
+            this.text.Name = "text";
+            this.text.Size = new System.Drawing.Size(118, 24);
+            this.text.TabIndex = 5;
+            this.text.Text = "DATA_NULL";
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(781, 474);
+            this.Controls.Add(this.text);
             this.Controls.Add(this.rollUp);
             this.Controls.Add(this.dropDown);
             this.Controls.Add(this.load_btn);
             this.Controls.Add(this.treeView);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.officeMenu.ResumeLayout(false);
+            this.teamMenu.ResumeLayout(false);
+            this.employeeMenu.ResumeLayout(false);
+            this.commonMenu.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -92,6 +263,24 @@
         private System.Windows.Forms.Button load_btn;
         private System.Windows.Forms.Button dropDown;
         private System.Windows.Forms.Button rollUp;
+        private System.Windows.Forms.ContextMenuStrip officeMenu;
+        private System.Windows.Forms.ContextMenuStrip teamMenu;
+        private System.Windows.Forms.ToolStripMenuItem добавитьОфисToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem changeCity;
+        private System.Windows.Forms.ToolStripMenuItem добавитьКомандуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip employeeMenu;
+        private System.Windows.Forms.ToolStripMenuItem изменитьДанныеОСотрудникеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem удалитьОфисToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem изменитьНазваниеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem удалитьКомандуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator удалитьToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem удалитьСотрудникаToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip commonMenu;
+        private System.Windows.Forms.ToolStripMenuItem addOfficeMenu;
+        private System.Windows.Forms.Label text;
     }
 }
 

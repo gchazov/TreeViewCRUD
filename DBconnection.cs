@@ -28,7 +28,7 @@ namespace CRUDTreeview
                 msDataAdapter = new MySqlDataAdapter(msCommand);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
