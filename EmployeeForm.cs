@@ -68,6 +68,8 @@ namespace CRUDTreeview
                                 {
                                     TreeNodeWithID node = new TreeNodeWithID(name.Text + " " + surname.Text, (int)reader["id"], 3);
                                     node.ContextMenuStrip = mf.getEmployeeMenu;
+                                    node.ImageIndex = 2;
+                                    node.SelectedImageIndex = 2;
                                     treeNode.Nodes.Add(node);
                                 }
                             }

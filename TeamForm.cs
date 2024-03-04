@@ -47,6 +47,8 @@ namespace CRUDTreeview
                                 {
                                     TreeNodeWithID node = new TreeNodeWithID(teamName.Text, (int)reader["id"], 2);
                                     node.ContextMenuStrip = mf.getTeamMenu;
+                                    node.ImageIndex = 1;
+                                    node.SelectedImageIndex = 1;
                                     treeNode.Nodes.Add(node);
                                 }
                             }

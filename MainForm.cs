@@ -27,6 +27,20 @@ namespace CRUDTreeview
             treeView.ItemDrag += TreeView_ItemDrag;
             treeView.DragEnter += TreeView_DragEnter;
             treeView.DragDrop += TreeView_DragDrop;
+
+            // Кастом
+            ImageList imageList = new ImageList();
+            imageList.Images.Add("office", Properties.Resources.office);
+            imageList.Images.Add("team", Properties.Resources.team);
+            imageList.Images.Add("employee", Properties.Resources.employee);
+
+            treeView.ImageList = imageList;
+
+        }
+
+        public ImageList GetImageList
+        {
+            get { return treeView.ImageList; }
         }
 
         private void TreeView_ItemDrag(object sender, ItemDragEventArgs e)
@@ -129,6 +143,7 @@ namespace CRUDTreeview
             treeView.Enabled = true;
             DBconnection.Connect();
             treeView.Nodes.Clear();
+            addOffice_another.Enabled = true;
             try
             {
                 DBconnection.msCommand.CommandText = "SELECT id, city_name FROM office";
@@ -139,6 +154,8 @@ namespace CRUDTreeview
                     {
                         TreeNodeWithID node = new TreeNodeWithID(reader["city_name"].ToString(), (int)reader["id"], 1);
                         node.ContextMenuStrip = officeMenu;
+                        node.ImageIndex = 0;
+                        node.SelectedImageIndex = 0;
                         treeView.Nodes.Add(node);
                         LoadTeam(node, (int)reader["id"]);
                     }
@@ -164,6 +181,8 @@ namespace CRUDTreeview
                         {
                             TreeNodeWithID node = new TreeNodeWithID(teamReader["name"].ToString(), (int)teamReader["id"], 2);
                             node.ContextMenuStrip = teamMenu;
+                            node.ImageIndex = 1;
+                            node.SelectedImageIndex = 1;
                             parent.Nodes.Add(node);
                             LoadEmployee(node, (int)teamReader["id"]);
                         }
@@ -186,6 +205,8 @@ namespace CRUDTreeview
                         {
                             TreeNodeWithID node = new TreeNodeWithID(empReader["name"].ToString() + " " + empReader["surname"].ToString(), (int)empReader["id"], 3);
                             node.ContextMenuStrip = employeeMenu;
+                            node.ImageIndex = 2;
+                            node.SelectedImageIndex = 2;
                             parent.Nodes.Add(node);
                         }
                     }
@@ -350,5 +371,11 @@ namespace CRUDTreeview
             }
         }
 
+        private void addOffice_another_Click(object sender, EventArgs e)
+        {
+            OfficeForm of = new OfficeForm(0, (TreeNodeWithID)treeView.SelectedNode, this);
+            of.StartPosition = FormStartPosition.CenterParent;
+            of.ShowDialog();
+        }
     }
 }

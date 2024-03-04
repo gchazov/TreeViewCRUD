@@ -53,7 +53,7 @@
             this.name.MaxLength = 50;
             this.name.Name = "name";
             this.name.Size = new System.Drawing.Size(165, 24);
-            this.name.TabIndex = 1;
+            this.name.TabIndex = 0;
             // 
             // okBtn
             // 
@@ -94,7 +94,7 @@
             this.surname.MaxLength = 50;
             this.surname.Name = "surname";
             this.surname.Size = new System.Drawing.Size(165, 24);
-            this.surname.TabIndex = 5;
+            this.surname.TabIndex = 1;
             // 
             // EmployeeForm
             // 

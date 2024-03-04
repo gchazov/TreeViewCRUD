@@ -51,6 +51,7 @@
             this.commonMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addOfficeMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.text = new System.Windows.Forms.Label();
+            this.addOffice_another = new System.Windows.Forms.Button();
             this.officeMenu.SuspendLayout();
             this.teamMenu.SuspendLayout();
             this.employeeMenu.SuspendLayout();
@@ -61,43 +62,47 @@
             // 
             this.treeView.AllowDrop = true;
             this.treeView.Enabled = false;
-            this.treeView.Font = new System.Drawing.Font("Century Gothic", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.treeView.Location = new System.Drawing.Point(80, 53);
+            this.treeView.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.treeView.Location = new System.Drawing.Point(-1, -1);
             this.treeView.Margin = new System.Windows.Forms.Padding(4);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(431, 333);
+            this.treeView.Size = new System.Drawing.Size(558, 415);
             this.treeView.TabIndex = 0;
             // 
             // load_btn
             // 
-            this.load_btn.Location = new System.Drawing.Point(217, 406);
+            this.load_btn.BackColor = System.Drawing.Color.Lime;
+            this.load_btn.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.load_btn.Location = new System.Drawing.Point(406, 424);
             this.load_btn.Margin = new System.Windows.Forms.Padding(4);
             this.load_btn.Name = "load_btn";
-            this.load_btn.Size = new System.Drawing.Size(163, 28);
+            this.load_btn.Size = new System.Drawing.Size(134, 42);
             this.load_btn.TabIndex = 1;
-            this.load_btn.Text = "LOAD DATA";
-            this.load_btn.UseVisualStyleBackColor = true;
+            this.load_btn.Text = "Загрузить";
+            this.load_btn.UseVisualStyleBackColor = false;
             this.load_btn.Click += new System.EventHandler(this.load_btn_Click);
             // 
             // dropDown
             // 
-            this.dropDown.Location = new System.Drawing.Point(555, 103);
+            this.dropDown.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dropDown.Location = new System.Drawing.Point(100, 424);
             this.dropDown.Margin = new System.Windows.Forms.Padding(4);
             this.dropDown.Name = "dropDown";
-            this.dropDown.Size = new System.Drawing.Size(183, 28);
+            this.dropDown.Size = new System.Drawing.Size(145, 42);
             this.dropDown.TabIndex = 2;
-            this.dropDown.Text = "DROP DOWN ALL";
+            this.dropDown.Text = "Раскрыть все";
             this.dropDown.UseVisualStyleBackColor = true;
             this.dropDown.Click += new System.EventHandler(this.dropDown_Click);
             // 
             // rollUp
             // 
-            this.rollUp.Location = new System.Drawing.Point(555, 177);
+            this.rollUp.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rollUp.Location = new System.Drawing.Point(253, 424);
             this.rollUp.Margin = new System.Windows.Forms.Padding(4);
             this.rollUp.Name = "rollUp";
-            this.rollUp.Size = new System.Drawing.Size(183, 28);
+            this.rollUp.Size = new System.Drawing.Size(145, 42);
             this.rollUp.TabIndex = 3;
-            this.rollUp.Text = "ROLL UP ALL";
+            this.rollUp.Text = "Свернуть все";
             this.rollUp.UseVisualStyleBackColor = true;
             this.rollUp.Click += new System.EventHandler(this.rollUp_Click);
             // 
@@ -227,28 +232,46 @@
             // text
             // 
             this.text.AutoSize = true;
-            this.text.BackColor = System.Drawing.Color.Transparent;
+            this.text.BackColor = System.Drawing.Color.White;
             this.text.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.text.Location = new System.Drawing.Point(94, 212);
+            this.text.Location = new System.Drawing.Point(12, 9);
             this.text.Name = "text";
             this.text.Size = new System.Drawing.Size(118, 24);
             this.text.TabIndex = 5;
             this.text.Text = "DATA_NULL";
             // 
+            // addOffice_another
+            // 
+            this.addOffice_another.Enabled = false;
+            this.addOffice_another.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.addOffice_another.Location = new System.Drawing.Point(16, 424);
+            this.addOffice_another.Margin = new System.Windows.Forms.Padding(4);
+            this.addOffice_another.Name = "addOffice_another";
+            this.addOffice_another.Size = new System.Drawing.Size(76, 42);
+            this.addOffice_another.TabIndex = 6;
+            this.addOffice_another.Text = "+Оффис";
+            this.addOffice_another.UseVisualStyleBackColor = true;
+            this.addOffice_another.Click += new System.EventHandler(this.addOffice_another_Click);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(781, 474);
+            this.ClientSize = new System.Drawing.Size(553, 476);
+            this.Controls.Add(this.addOffice_another);
             this.Controls.Add(this.text);
             this.Controls.Add(this.rollUp);
             this.Controls.Add(this.dropDown);
             this.Controls.Add(this.load_btn);
             this.Controls.Add(this.treeView);
+            this.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form1";
+            this.Text = "TreeView CRUD";
             this.officeMenu.ResumeLayout(false);
             this.teamMenu.ResumeLayout(false);
             this.employeeMenu.ResumeLayout(false);
@@ -282,6 +305,7 @@
         private System.Windows.Forms.ContextMenuStrip commonMenu;
         private System.Windows.Forms.ToolStripMenuItem addOfficeMenu;
         private System.Windows.Forms.Label text;
+        private System.Windows.Forms.Button addOffice_another;
     }
 }
 
