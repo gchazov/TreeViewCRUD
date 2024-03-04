@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using TreeView = System.Windows.Forms.TreeView;
 
@@ -66,6 +67,23 @@ namespace CRUDTreeview
                     targetNode.Nodes.Add(draggedNode);
 
                 targetNode.Expand();
+
+                using (MySqlConnection connection = new MySqlConnection(DBconnection.connectionString))
+                {
+                    connection.Open();
+                    using (MySqlCommand employeecommand = connection.CreateCommand())
+                    {
+                        if (draggedNode.NodeLevel == 3) 
+                        {
+                            employeecommand.CommandText = $"UPDATE employee SET team_id = {targetNode.Id} WHERE id = {draggedNode.Id}";
+                        }
+                        else if (draggedNode.NodeLevel == 2)
+                        {
+                            employeecommand.CommandText = $"UPDATE team SET office_id = {targetNode.Id} WHERE id = {draggedNode.Id}";
+                        }
+                        employeecommand.ExecuteNonQuery();
+                    }
+                }
             }
         }
 
