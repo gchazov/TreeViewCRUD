@@ -52,40 +52,35 @@ namespace CRUDTreeview
 
         private void TreeView_DragDrop(object sender, DragEventArgs e)
         {
-            // Получаем перетаскиваемый узел из данных
             TreeNodeWithID draggedNode = (TreeNodeWithID)e.Data.GetData(typeof(TreeNodeWithID));
-
-            // Получаем точку, в которую был брошен узел
             Point targetPoint = treeView.PointToClient(new Point(e.X, e.Y));
+            TreeNodeWithID targetNode = (TreeNodeWithID)treeView.GetNodeAt(targetPoint);
 
-            // Получаем узел, над которым был брошен перетаскиваемый узел
-            TreeNode targetNode = treeView.GetNodeAt(targetPoint);
-
-            // Проверяем, не пытаемся ли перетащить узел на самого себя или на его потомка
-            if (!draggedNode.Equals(targetNode) && !ContainsNode(draggedNode, targetNode))
+            if (!draggedNode.Equals(targetNode) && !ContainsNode(draggedNode, targetNode) && IsUpper(draggedNode, targetNode))
             {
-                // Удаляем узел из его текущего местоположения
                 draggedNode.Remove();
 
-                // Если целевой узел равен null, значит, узел был брошен вне TreeView
                 if (targetNode == null)
                     treeView.Nodes.Add(draggedNode);
                 else
                     targetNode.Nodes.Add(draggedNode);
 
-                // Раскрываем родительский узел целевого узла, чтобы показать добавленный узел
                 targetNode.Expand();
             }
         }
 
         private bool ContainsNode(TreeNode node1, TreeNode node2)
         {
-            // Проверяем, является ли node2 потомком node1
             if (node2 == null || node2.Parent == null)
                 return false;
             if (node2.Parent.Equals(node1))
                 return true;
             return ContainsNode(node1, node2.Parent);
+        }
+
+        private bool IsUpper(TreeNodeWithID node1, TreeNodeWithID node2)
+        {
+            return node1.NodeLevel - node2.NodeLevel == 1;
         }
 
         public System.Windows.Forms.TreeView getTree
@@ -124,7 +119,7 @@ namespace CRUDTreeview
                 {
                     while (reader.Read())
                     {
-                        TreeNodeWithID node = new TreeNodeWithID(reader["city_name"].ToString(), (int)reader["id"]);
+                        TreeNodeWithID node = new TreeNodeWithID(reader["city_name"].ToString(), (int)reader["id"], 1);
                         node.ContextMenuStrip = officeMenu;
                         treeView.Nodes.Add(node);
                         LoadTeam(node, (int)reader["id"]);
@@ -149,7 +144,7 @@ namespace CRUDTreeview
                     {
                         while (teamReader.Read())
                         {
-                            TreeNodeWithID node = new TreeNodeWithID(teamReader["name"].ToString(), (int)teamReader["id"]);
+                            TreeNodeWithID node = new TreeNodeWithID(teamReader["name"].ToString(), (int)teamReader["id"], 2);
                             node.ContextMenuStrip = teamMenu;
                             parent.Nodes.Add(node);
                             LoadEmployee(node, (int)teamReader["id"]);
@@ -171,7 +166,7 @@ namespace CRUDTreeview
                     {
                         while (empReader.Read())
                         {
-                            TreeNodeWithID node = new TreeNodeWithID(empReader["name"].ToString() + " " + empReader["surname"].ToString(), (int)empReader["id"]);
+                            TreeNodeWithID node = new TreeNodeWithID(empReader["name"].ToString() + " " + empReader["surname"].ToString(), (int)empReader["id"], 3);
                             node.ContextMenuStrip = employeeMenu;
                             parent.Nodes.Add(node);
                         }
@@ -222,9 +217,16 @@ namespace CRUDTreeview
 
         private void editoffice(object sender, EventArgs e)
         {
-            OfficeForm of = new OfficeForm(1, (TreeNodeWithID)treeView.SelectedNode, this);
-            of.StartPosition = FormStartPosition.CenterParent;
-            of.ShowDialog();
+            try
+            {
+                OfficeForm of = new OfficeForm(1, (TreeNodeWithID)treeView.SelectedNode, this);
+                of.StartPosition = FormStartPosition.CenterParent;
+                of.ShowDialog();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Офис не выбран! Выберите значение из дерева или добавьте новый", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void deleteTeam(object sender, EventArgs e)
@@ -251,30 +253,58 @@ namespace CRUDTreeview
 
         private void addTeam(object sender, EventArgs e)
         {
-            TeamForm tf = new TeamForm(0, (TreeNodeWithID)treeView.SelectedNode, this);
-            tf.StartPosition = FormStartPosition.CenterParent;
-            tf.ShowDialog();
+            try
+            {
+                TeamForm tf = new TeamForm(0, (TreeNodeWithID)treeView.SelectedNode, this);
+                tf.StartPosition = FormStartPosition.CenterParent;
+                tf.ShowDialog();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Офис не выбран! Выберите значение из дерева или добавьте новый", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void editTeam(object sender, EventArgs e)
         {
-            TeamForm tf = new TeamForm(1, (TreeNodeWithID)treeView.SelectedNode, this);
-            tf.StartPosition = FormStartPosition.CenterParent;
-            tf.ShowDialog();
+            try
+            {
+                TeamForm tf = new TeamForm(1, (TreeNodeWithID)treeView.SelectedNode, this);
+                tf.StartPosition = FormStartPosition.CenterParent;
+                tf.ShowDialog();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Команда не выбрана! Выберите значение из дерева или добавьте новую", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void editEmployee(object sender, EventArgs e)
         {
-            EmployeeForm ef = new EmployeeForm(1, (TreeNodeWithID)treeView.SelectedNode, this);
-            ef.StartPosition = FormStartPosition.CenterParent;
-            ef.ShowDialog();
+            try
+            {
+                EmployeeForm ef = new EmployeeForm(1, (TreeNodeWithID)treeView.SelectedNode, this);
+                ef.StartPosition = FormStartPosition.CenterParent;
+                ef.ShowDialog();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Сотрудник не выбран! Выберите значение из дерева или добавьте нового", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void addEmployee(object sender, EventArgs e)
         {
-            EmployeeForm ef = new EmployeeForm(0, (TreeNodeWithID)treeView.SelectedNode, this);
-            ef.StartPosition = FormStartPosition.CenterParent;
-            ef.ShowDialog();
+            try
+            {
+                EmployeeForm ef = new EmployeeForm(0, (TreeNodeWithID)treeView.SelectedNode, this);
+                ef.StartPosition = FormStartPosition.CenterParent;
+                ef.ShowDialog();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Команда не выбрана! Выберите значение из дерева или добавьте новую", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void deleteEmployee(object sender, EventArgs e)

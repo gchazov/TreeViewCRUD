@@ -45,7 +45,7 @@ namespace CRUDTreeview
                             {
                                 while (reader.Read())
                                 {
-                                    TreeNodeWithID node = new TreeNodeWithID(cityName.Text, (int)reader["id"]);
+                                    TreeNodeWithID node = new TreeNodeWithID(cityName.Text, (int)reader["id"], 1);
                                     node.ContextMenuStrip = mf.getOfficeMenu;
                                     mf.getTree.Nodes.Add(node);
                                 }

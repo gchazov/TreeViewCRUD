@@ -11,13 +11,20 @@ namespace CRUDTreeview
     public class TreeNodeWithID : TreeNode
     {
         int id;
+        int level;
         public int Id
         {
             get { return id; }
         } 
-        public TreeNodeWithID(string name, int id_code) : base(name)
+
+        public int NodeLevel
+        {
+            get { return level; }
+        }
+        public TreeNodeWithID(string name, int id_code, int level_val) : base(name)
         {
             this.id = id_code;
+            this.level = level_val;
         }
     }
 }

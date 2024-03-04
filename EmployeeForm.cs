@@ -17,14 +17,20 @@ namespace CRUDTreeview
             this.treeNode = treeNode;
             this.Text = flag == 0 ? $"Добавление сотрудника в команду {treeNode.Text}" : $"Изменение сотрудника в команде {treeNode.Text}";
             okBtn.Text = flag == 0 ? "Добавить" : "Изменить";
-            name.Text = flag != 0 ? treeNode.Text : "";
-            surname.Text = flag != 0 ? treeNode.Text : "";
             this.mf = mf;
+            UpdateNameSurname();
         }
 
         private void cancelBtn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        void UpdateNameSurname()
+        {
+            string[] info = treeNode.Text.Split();
+            name.Text = flag != 0 ? info[0] : "";
+            surname.Text = flag != 0 ? string.Join(" ", info, 1, info.Length - 1) : "";
         }
 
         private void okBtn_Click(object sender, EventArgs e)
@@ -60,7 +66,7 @@ namespace CRUDTreeview
                             {
                                 if (reader.Read())
                                 {
-                                    TreeNodeWithID node = new TreeNodeWithID(name.Text + " " + surname.Text, (int)reader["id"]);
+                                    TreeNodeWithID node = new TreeNodeWithID(name.Text + " " + surname.Text, (int)reader["id"], 3);
                                     node.ContextMenuStrip = mf.getEmployeeMenu;
                                     treeNode.Nodes.Add(node);
                                 }
